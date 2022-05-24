@@ -52,6 +52,7 @@ Nodo_ped* insert_ped(Nodo_ped *&product, string n, int o){
         while (aux -> siguiente != NULL){
             aux = aux -> siguiente;
         }
+        
         aux -> siguiente = new_product;
     }
 
@@ -78,13 +79,36 @@ void mostrar_ped(Nodo_ped *lista){
     }
 }
 
-void leer_archivo(pedido){
-    string line;
-    ifstream archivo(pedido);
+void leer_archivo(Nodo_inv *&produc_inv, Nodo_ped *&ped){
+    string line, inventario, pedidoss, nombre;
+    int cantidad, precio;
+    bool inv;
+    ifstream archivo("mercadito_pedidos1.txt");
+    inv = true;
     
-    while(getline(archivo,line) != "-"){
+    while(getline(archivo,line)){
+        if (line != "-" && inv){
+            inventario = inventario + line + " ";
+            
+        }
+        
+        else{
+            inv = false;
+            if (line != "-"){
+                pedidoss = pedidoss + line + " ";
+            }
+        }
+        
+     
+     
+     
         
     }
+    
+    
+    cout << inventario << endl;
+    cout << endl;
+    cout << pedidoss;
 }
 
 int main(){
@@ -95,7 +119,7 @@ int main(){
     int o;
     int i = 0;
 
-    while (i < 5){
+    /*while (i < 5){
         cout << "Inserta nombre del pedido" << endl;
         cin >> n;
         cin  >> o;
@@ -109,6 +133,9 @@ int main(){
     mostrar_ped(ped);
     
     cout << endl;
+    */
+    
+    leer_archivo(produc_inv, ped);
 
     return 0;
 }
