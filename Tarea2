@@ -78,6 +78,15 @@ void mostrar_ped(Nodo_ped *lista){
     }
 }
 
+void leer_archivo(pedido){
+    string line;
+    ifstream archivo(pedido);
+    
+    while(getline(archivo,line) != "-"){
+        
+    }
+}
+
 int main(){
     Nodo_inv *produc_inv = NULL;
     Nodo_ped *ped = NULL;
