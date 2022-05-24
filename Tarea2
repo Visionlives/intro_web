@@ -1,0 +1,62 @@
+#include <fstream>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+struct Nodo_inv{
+    string dato;
+    Nodo_inv *siguiente;
+};
+
+Nodo_inv* insert_p_inv(Nodo_inv *&product, string n){
+    Nodo_inv *new_product = new Nodo_inv();
+    new_product -> dato = n;
+    new_product -> siguiente = NULL;
+
+    if (product == NULL){
+        product = new_product;
+    }
+    else{
+        Nodo_inv *aux = product;
+        while (aux -> siguiente != NULL){
+            aux = aux -> siguiente;
+        }
+        aux -> siguiente = new_product;
+    }
+
+    return product;
+}
+
+void mostrar_lista(Nodo_inv *lista){
+    Nodo_inv *actual = new Nodo_inv();
+    actual = lista;
+
+    while (actual != NULL){
+        cout << actual -> dato << " -> ";
+        actual = actual -> siguiente;
+    }
+}
+
+int main(){
+    Nodo_inv *produc_inv = NULL;
+    
+    string n;
+    int i = 0;
+
+    while (i < 5){
+        cout << "Inserta nombre del producto" << endl;
+        cin >> n;
+        produc_inv = insert_p_inv(produc_inv, n);
+
+        i++;
+    }
+
+    cout << endl;
+
+    mostrar_lista(produc_inv);
+    
+    cout << endl;
+
+    return 0;
+}
