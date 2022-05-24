@@ -5,13 +5,17 @@
 using namespace std;
 
 struct Nodo_inv{
-    string dato;
+    string name;
+    int stock;
+    int price;
     Nodo_inv *siguiente;
 };
 
-Nodo_inv* insert_p_inv(Nodo_inv *&product, string n){
+Nodo_inv* insert_p_inv(Nodo_inv *&product, string n, int s, int p){
     Nodo_inv *new_product = new Nodo_inv();
-    new_product -> dato = n;
+    new_product -> name = n;
+    new_product -> stock = s;
+    new_product -> price = p;
     new_product -> siguiente = NULL;
 
     if (product == NULL){
@@ -28,33 +32,72 @@ Nodo_inv* insert_p_inv(Nodo_inv *&product, string n){
     return product;
 }
 
+struct Nodo_ped{
+    string name;
+    int order;
+    Nodo_ped *siguiente;
+};
+
+Nodo_ped* insert_ped(Nodo_ped *&product, string n, int o){
+    Nodo_ped *new_product = new Nodo_ped();
+    new_product -> name = n;
+    new_product -> order = o;
+    new_product -> siguiente = NULL;
+
+    if (product == NULL){
+        product = new_product;
+    }
+    else{
+        Nodo_ped *aux = product;
+        while (aux -> siguiente != NULL){
+            aux = aux -> siguiente;
+        }
+        aux -> siguiente = new_product;
+    }
+
+    return product;
+}
+
 void mostrar_lista(Nodo_inv *lista){
     Nodo_inv *actual = new Nodo_inv();
     actual = lista;
 
     while (actual != NULL){
-        cout << actual -> dato << " -> ";
+        cout << actual -> name << " " << actual -> stock << " " << actual -> price << " -> ";
+        actual = actual -> siguiente;
+    }
+}
+
+void mostrar_ped(Nodo_ped *lista){
+    Nodo_ped *actual = new Nodo_ped();
+    actual = lista;
+
+    while (actual != NULL){
+        cout << actual -> name << " " << actual -> order << " -> ";
         actual = actual -> siguiente;
     }
 }
 
 int main(){
     Nodo_inv *produc_inv = NULL;
+    Nodo_ped *ped = NULL;
     
     string n;
+    int o;
     int i = 0;
 
     while (i < 5){
-        cout << "Inserta nombre del producto" << endl;
+        cout << "Inserta nombre del pedido" << endl;
         cin >> n;
-        produc_inv = insert_p_inv(produc_inv, n);
+        cin  >> o;
+        ped = insert_ped(ped, n, o);
 
         i++;
     }
 
     cout << endl;
 
-    mostrar_lista(produc_inv);
+    mostrar_ped(ped);
     
     cout << endl;
 
